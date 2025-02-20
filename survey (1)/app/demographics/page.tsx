@@ -26,7 +26,13 @@ export default function Demographics() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    fetch("/api/google-sheets")
+      .then((res) => res.json())
+      .then((result) => setData(result.data))
+      .catch((err) => console.error("Error fetching Google Sheets data:", err));
+    
     console.log("Demographics page mounted")
+    
     return () => {
       console.log("Demographics page unmounted")
     }
